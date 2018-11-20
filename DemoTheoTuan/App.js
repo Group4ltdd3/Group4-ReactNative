@@ -10,11 +10,29 @@ import React from 'react';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import HomeScreen from './HomeScreen';
 import DetailScreen from './DetailScreen';
+import ShoppingCart from './ShoppingCart';
+
 
 const RootStack = createStackNavigator(
   {
-  Home: HomeScreen,
-  Detail: DetailScreen
+  Home: {
+    screen: HomeScreen, 
+    navigationOptions: {
+      headerTitle: 'Home'
+    }
+  },
+  Detail: { 
+    screen: DetailScreen,
+    navigationOptions: {
+      headerTitle: 'Detail'
+    }
+  },
+  Shopping: {
+    screen: ShoppingCart,
+    navigationOptions: {
+      headerTitle: 'Shopping Cart'
+    }
+  },
 },
 {
   initialRouteName: 'Home',

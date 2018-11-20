@@ -1,16 +1,16 @@
 
 
 import React, {Component} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View, Button} from 'react-native';
 
 
 
-export default class DetailScreen extends Component {
+export default class ShoppingCart extends Component {
   render() {
     return (
       <View style={styles.container}>
-          <Text>Detail Screen</Text>
-          <Button title='Go to ShoppingCart Screen' onPress={()=>this.props.navigation.navigate('Shopping')}
+          <Text>Shopping Cart Screen</Text>
+          <Button title='Go to Home Screen' onPress={()=> this.props.navigation.navigate('Home')}
           />
       </View>
     );
