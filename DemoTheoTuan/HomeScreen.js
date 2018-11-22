@@ -1,65 +1,99 @@
 
 
 import React from 'react';
-import { StyleSheet, Text, View, Button, ListView} from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList, Image} from 'react-native';
 
-var DATA = [
-  {sinhVien: 'Vo Phuong Quan',lopHoc: 'LTDD3'},
-  {sinhVien: 'Viet Tran',lopHoc: 'LTDD3'},
-  {sinhVien: 'Phuc Hoang',lopHoc: 'LTDD3'},
-  {sinhVien: 'Xuan Phuc',lopHoc: 'LTDD3'},
-  {sinhVien: 'Hoang Nam',lopHoc: 'LTDD3'},
-  {sinhVien: 'Thanh Hoa',lopHoc: 'LTDD3'},
-
-];
 
 
 export default class HomeScreen extends React.Component {
 
-  constructor() {
-    super(); 
-      const ds = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2 });
+  constructor(props) {
+    super(props); 
       this.state = {
-        dataSource: ds.cloneWithRows(DATA)
+          mang:[]
       }
+      console.disableYellowBox = true
     
   }
 
-  taoHang(property){
-    return(
-      <View style={{padding: 10}}>
-        <Text style={{color: 'red'}}>{property.sinhVien}</Text>
-        <Text>{property.lopHoc}</Text>
-      </View>
-    )
-  }
-
-
+  
   render() {
     return (
-        <View style={styles.container}>
-        <ListView dataSource={this.state.dataSource}
-        renderRow = {this.taoHang}
-        >
+      
+        <FlatList
+        data={this.state.mang}
+        renderItem={({item})=>
+      <View style={styles.container}>
+        <View style={styles.left}>
+        <Image
+          style={{width: 150, height: 150}}
+          source={{uri: item.img}}
+        />
+        </View>
+        <View style={styles.right}>
+          <Text>{item.des}</Text>
+          <View style={styles.button}>
+          <Button title='Go to Detail Screen' onPress={()=> this.props.navigation.navigate('Detail')} />
+          </View>
+        </View>
+        
+        
+      </View>}>
 
-        </ListView>
-       
-        <Text>Home Screen</Text>
-        <Button title="Go to Detail Screen" onPress={() =>this.props.navigation.navigate('Detail')}>
-
-        </Button>
-    </View>
+        </FlatList>
+        
+        
     );
   }
+
+  componentDidMount(){
+    fetch("http://192.168.1.9:8080/webservice/home.php")
+    .then((response)=> response.json())
+    .then((responseJson)=>{
+      this.setState({
+        mang:responseJson
+      });
+    })
+    .catch((error)=>{console.log(error)});
+  }
+
+  
+  
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    borderBottomWidth:1,
+    padding: 50,
+    borderRightWidth: 1,
+    flexDirection: "row",
+    backgroundColor: "#66cdaa"
   },
+
+  left: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  
+  right: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  button: {
+    width: 165,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 30,
+    marginLeft: 50
+    
+
+  }
+
   
   
 });
+
+

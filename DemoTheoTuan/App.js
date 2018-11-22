@@ -12,12 +12,13 @@ import Login from './Login';
 import HomeScreen from './HomeScreen';
 import DetailScreen from './DetailScreen';
 import ShoppingCart from './ShoppingCart';
+import LoginScreen from './LoginScreen';
 
 
 const RootStack = createStackNavigator(
   {
     Login: {
-      screen: Login, 
+      screen: LoginScreen, 
       navigationOptions: {
         headerTitle: 'Login'
       }
