@@ -1,5 +1,3 @@
-
-
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View, Image, TouchableOpcity} from 'react-native';
 
