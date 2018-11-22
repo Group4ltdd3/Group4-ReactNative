@@ -52,7 +52,8 @@ export default class LoginScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'rgb(32, 53, 70)',
+       // backgroundColor: 'rgb(32, 53, 70)', 
+       backgroundColor: "#191970",
         flexDirection: 'column',
     },
     logoContainer: {

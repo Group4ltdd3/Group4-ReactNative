@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import { StyleSheet, Text, View, Button, FlatList, Image} from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList, Image, TouchableOpacity} from 'react-native';
 
 
 
@@ -10,7 +10,9 @@ export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props); 
       this.state = {
-          mang:[]
+          mang:[],
+          refresh:false,
+          page: 1
       }
       console.disableYellowBox = true
     
@@ -21,9 +23,19 @@ export default class HomeScreen extends React.Component {
     return (
       
         <FlatList
+
+        refreshing={this.state.refresh}
+        onRefresh={()=>{this.refresh()}}
+        onEndReachedThreshold={-0.2}
+        onEndReached={()=>{
+          this.setState({
+            page: this.state.page + 1
+          })
+        }}
+
         data={this.state.mang}
         renderItem={({item})=>
-      <View style={styles.container}>
+      <TouchableOpacity style={styles.container} onPress={()=>{this.props.navigation.navigate('Detail')}}>
         <View style={styles.left}>
         <Image
           style={{width: 150, height: 150}}
@@ -31,14 +43,17 @@ export default class HomeScreen extends React.Component {
         />
         </View>
         <View style={styles.right}>
+          
+          <Text style={styles.title}>{item.title}</Text>
+          <Text >{item.price}</Text>
           <Text>{item.des}</Text>
-          <View style={styles.button}>
-          <Button title='Go to Detail Screen' onPress={()=> this.props.navigation.navigate('Detail')} />
-          </View>
+          
+          
+          
         </View>
         
         
-      </View>}>
+      </TouchableOpacity>}>
 
         </FlatList>
         
@@ -46,8 +61,23 @@ export default class HomeScreen extends React.Component {
     );
   }
 
+  refresh(){
+    this.setState({
+      refresh: true
+    });
+    fetch("http://192.168.1.9:8080/webservice/random_data.php")
+    .then((response)=> response.json())
+    .then((responseJson)=>{
+      this.setState({
+        mang:responseJson,
+        refresh:false
+      });
+    })
+    .catch((error)=>{console.log(error)});
+  }
+
   componentDidMount(){
-    fetch("http://192.168.1.9:8080/webservice/home.php")
+    fetch("http://192.168.1.9:8080/webservice/page_data.php?page=1")
     .then((response)=> response.json())
     .then((responseJson)=>{
       this.setState({
@@ -67,7 +97,7 @@ const styles = StyleSheet.create({
     padding: 50,
     borderRightWidth: 1,
     flexDirection: "row",
-    backgroundColor: "#66cdaa"
+    backgroundColor: "#191970"
   },
 
   left: {
@@ -88,9 +118,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 30,
     marginLeft: 50
-    
-
-  }
+  },
+  title: {
+    color:"#FFFAF0",
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginLeft: 20
+  },
 
   
   

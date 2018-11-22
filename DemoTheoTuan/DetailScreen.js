@@ -9,7 +9,7 @@ export default class DetailScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-      <View style={{backgroundColor: 'aquamarine', flex: 1}}>
+      <View style={{backgroundColor: '#191970', flex: 1}}>
       <View style={{flexDirection: 'column', margin: 20}}>
       <Image source={{uri: 'https://cdn.tgdd.vn/Products/Images/42/191482/iphone-xs-max-512gb-gold-400x460.png'}}
       style={{flexWrap: 'wrap', width: 100, height:100}}
