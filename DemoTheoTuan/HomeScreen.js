@@ -27,11 +27,7 @@ export default class HomeScreen extends React.Component {
         refreshing={this.state.refresh}
         onRefresh={()=>{this.refresh()}}
         onEndReachedThreshold={-0.2}
-        onEndReached={()=>{
-          this.setState({
-            page: this.state.page + 1
-          })
-        }}
+        onEndReached={()=>{this.onEndReached()}}
 
         data={this.state.mang}
         renderItem={({item})=>
@@ -61,6 +57,18 @@ export default class HomeScreen extends React.Component {
     );
   }
 
+  onEndReached(){
+    fetch("http://192.168.1.9:8080/webservice/page_data.php?trang=" + (this.state.page + 1))
+    .then((response)=> response.json())
+    .then((responseJson)=>{
+      this.setState({
+        mang: this.state.mang.concat(responseJson),
+        page: this.state.page + 1
+      });
+    })
+    .catch((error)=>{console.log(error)});
+  }
+
   refresh(){
     this.setState({
       refresh: true
@@ -77,7 +85,7 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount(){
-    fetch("http://192.168.1.9:8080/webservice/page_data.php?page=1")
+    fetch("http://192.168.1.9:8080/webservice/home.php")
     .then((response)=> response.json())
     .then((responseJson)=>{
       this.setState({
