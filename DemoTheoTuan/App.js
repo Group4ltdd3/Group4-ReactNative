@@ -12,11 +12,31 @@ import HomeScreen from './HomeScreen';
 import DetailScreen from './DetailScreen';
 import ShoppingCart from './ShoppingCart';
 import LoginScreen from './LoginScreen';
+<<<<<<< HEAD
 import RegisterScreen from './RegisterScreen';
+=======
+import LogoutScreen from './LogoutScreen';
+import InforScreen from './InforScreen';
+>>>>>>> 25fb367fdabe442848e1dd344dce7ef4231c4c4a
 
 
 const RootStack = createStackNavigator(
   {
+    Logout: {
+      screen: LogoutScreen, 
+      navigationOptions: {
+        headerTitle: 'Logout'
+      }
+    },
+
+    Infor: {
+      screen: InforScreen, 
+      navigationOptions: {
+        headerTitle: 'Infor'
+      }
+    },
+
+
     Login: {
       screen: LoginScreen, 
       
@@ -45,7 +65,7 @@ const RootStack = createStackNavigator(
   },
 },
 {
-  initialRouteName: 'Login',
+  initialRouteName: 'Logout',
 }
 );
 
