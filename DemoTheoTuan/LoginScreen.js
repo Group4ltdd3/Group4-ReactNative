@@ -73,8 +73,8 @@ export default class LoginScreen extends Component {
     
 
     login(){
-        this.props.navigation.navigate('Home');
-      /*
+        //this.props.navigation.navigate('Home');
+      
         fetch('http://192.168.0.109:8080/webservice/login.php', {
             method: 'POST',
             headers: {
@@ -98,7 +98,7 @@ export default class LoginScreen extends Component {
         .catch((error)=>{
             console.log(error);
         })
-        */
+        
     }
   
      
