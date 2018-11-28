@@ -3,17 +3,30 @@ import {
     StyleSheet, Text, View, Image,
     TouchableWithoutFeedback, StatusBar,
     TextInput, SafeAreaView, Keyboard, TouchableOpacity,
-    KeyboardAvoidingView, Button
+    KeyboardAvoidingView, Button, ToolbarAndroid
 } from 'react-native'
 
 export default class LoginScreen extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          password: "",
+          username: "",
+          
+        };
+      }
+
+
+
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <StatusBar barStyle="light-content" />
-                <KeyboardAvoidingView behavior='padding' style={styles.container}>
+                <StatusBar barStyle="light-content" backgroundColor= "#1c313a" />
+                <KeyboardAvoidingView behavior='padding' style={styles.container} enabled>
                     <TouchableWithoutFeedback style={styles.container} 
                             onPress={Keyboard.dismiss}>
+                            
                         <View style={styles.logoContainer}>
                             <View style={styles.logoContainer}>
                                 <Image style={styles.logo}
@@ -23,6 +36,8 @@ export default class LoginScreen extends Component {
                             </View>
                             <View style={styles.infoContainer}>
                                 <TextInput style={styles.input}
+                                    value= {this.state.username}
+                                    onChangeText={username => this.setState({ username })}
                                     placeholder="Enter username/email"
                                     placeholderTextColor='rgba(255,255,255,0.8)'
                                     keyboardType='email-address'
@@ -31,6 +46,8 @@ export default class LoginScreen extends Component {
                                     onSubmitEditing={()=> this.refs.txtPassword.focus()}
                                 />
                                 <TextInput style={styles.input} 
+                                    value= {this.state.password}
+                                    onChangeText={password => this.setState({ password })}
                                     placeholder="Enter password"
                                     placeholderTextColor='rgba(255,255,255,0.8)'
                                     returnKeyType='go'
@@ -38,41 +55,83 @@ export default class LoginScreen extends Component {
                                     autoCorrect={false}
                                     ref={"txtPassword"}
                                 />
-                                <TouchableOpacity style={styles.buttonContainer} onPress={()=>this.props.navigation.navigate('Home')} >
+                                <TouchableOpacity style={styles.buttonContainer} onPress={()=>this.login()} >
                                     <Text style={styles.buttonText}>SIGN IN</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.buttonContainer} onPress={()=>this.props.navigation.navigate('Register')} >
+                                    <Text style={styles.buttonText}>SIGN UP</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
+                        
                     </TouchableWithoutFeedback>
                 </KeyboardAvoidingView>
             </SafeAreaView>
+             
         )
     }
+    
+
+    login(){
+        this.props.navigation.navigate('Home');
+      /*
+        fetch('http://192.168.0.109:8080/webservice/login.php', {
+            method: 'POST',
+            headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+  },
+            body: JSON.stringify({
+            username: this.state.username,
+            password: this.state.password
+  }),
+})
+        .then((response)=> response.json())
+        .then((responseJson)=>{
+            if (responseJson == "ok"){
+                alert("Successfully Login");
+                this.props.navigation.navigate('Home');
+            }else {
+                alert("Wrong Details");
+            }
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+        */
+    }
+  
+     
+    
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 2,
        // backgroundColor: 'rgb(32, 53, 70)', 
-       backgroundColor: "#191970",
+       backgroundColor: "#455a64",
         flexDirection: 'column',
+        
     },
     logoContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        flex: 1
+        flex: 1,
     },
     logo: {
         width: 128,
         height: 120,
+        
     },
     title: {
         color: '#f7c744',
         fontSize: 18,
         textAlign: 'center',
         marginTop: 5,
-        opacity: 0.9
+        opacity: 0.9,
+        marginBottom: 150
     },
     infoContainer: {
+        marginBottom: 70,
         position: 'absolute',
         left: 0,
         right: 0,
@@ -90,12 +149,18 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         backgroundColor: '#f7c744',
-        paddingVertical: 15
+        paddingVertical: 15,
+        margin: 5
+
     },
     buttonText: {
         textAlign: 'center',
         color :'rgb(32, 53, 70)',
         fontWeight: 'bold',
         fontSize: 18
+    },
+    hello: {
+        marginTop: 450
     }
+    
 })

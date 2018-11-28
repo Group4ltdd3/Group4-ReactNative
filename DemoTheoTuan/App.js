@@ -8,20 +8,18 @@
 
 import React from 'react';
 import { createStackNavigator, createAppContainer } from "react-navigation";
-import Login from './Login';
 import HomeScreen from './HomeScreen';
 import DetailScreen from './DetailScreen';
 import ShoppingCart from './ShoppingCart';
 import LoginScreen from './LoginScreen';
+import RegisterScreen from './RegisterScreen';
 
 
 const RootStack = createStackNavigator(
   {
     Login: {
       screen: LoginScreen, 
-      navigationOptions: {
-        headerTitle: 'Login'
-      }
+      
     },
   
   Home: {
@@ -41,6 +39,9 @@ const RootStack = createStackNavigator(
     navigationOptions: {
       headerTitle: 'Shopping Cart'
     }
+  },
+  Register: {
+    screen: RegisterScreen
   },
 },
 {
