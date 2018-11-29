@@ -75,7 +75,7 @@ export default class LoginScreen extends Component {
     login(){
         //this.props.navigation.navigate('Home');
       
-        fetch('http://192.168.0.109:8080/webservice/login.php', {
+        fetch('http://192.168.1.13/webservice/login.php', {
             method: 'POST',
             headers: {
             Accept: 'application/json',
