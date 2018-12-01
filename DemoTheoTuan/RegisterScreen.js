@@ -8,12 +8,19 @@ import {
   TouchableHighlight,
   Image,
   KeyboardAvoidingView,
+  Dimensions,
+  TouchableOpacity
   
 } from "react-native";
 
 import { StackNavigator } from "react-navigation";
 
 export default class RegisterScreen extends Component {
+
+  static navigationOptions = {
+    header: null // Không sử dụng thanh toolbar giống trong Android
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -22,31 +29,24 @@ export default class RegisterScreen extends Component {
       username: "",
       
     };
-  }
-
-  static navigationOptions = {
-    headerStyle: {
-      backgroundColor: "#16a085",
-      elevation: null
-    }
-  };
-
-   
+  }   
 
   render() {
     return (
-      <View behavior="padding" style={styles.container}>
+      <View style={styles.container}>
+
         <View style={styles.logoContainer}>
           <Image style={styles.logo} source={{uri:"https://cdn0.iconfinder.com/data/icons/BrushedMetalIcons_meBaze/512/Apple-03.png"}} />
           <Text style={styles.subtext}>Sign Up</Text>
         </View>
-        <KeyboardAvoidingView behavior='padding' enabled>
-          <TextInput
+
+        <View style={styles.viewText}>
+        <TextInput
             value={this.state.username}
             onChangeText={username => this.setState({ username })}
             style={styles.input}
             placeholder="Username"
-            placeholderTextColor="rgba(255,255,255,0.7)"
+            placeholderTextColor="#455a64"
             returnKeyType="next"
             onSubmitEditing={() => this.emailInput.focus()}
           />
@@ -54,7 +54,7 @@ export default class RegisterScreen extends Component {
             value={this.state.email}
             onChangeText={email => this.setState({ email })}
             style={styles.input}
-            placeholderTextColor="rgba(255,255,255,0.7)"
+            placeholderTextColor="#455a64"
             returnKeyType="next"
             ref={input => (this.emailInput = input)}
             onSubmitEditing={() => this.passwordCInput.focus()}
@@ -69,20 +69,24 @@ export default class RegisterScreen extends Component {
             style={styles.input}
             placeholder="Password"
             secureTextEntry={true}
-            placeholderTextColor="rgba(255,255,255,0.7)"
+            placeholderTextColor="#455a64"
             ref={input => (this.passwordCInput = input)}
             onSubmitEditing={() => this.passwordInput.focus()}
             returnKeyType="next"
-            
           />
-          
-        </KeyboardAvoidingView>
+        </View>
+        
+
         <TouchableHighlight
           onPress={()=>this.register()}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Register</Text>
+          style={styles.button}>
+          <Text style={styles.buttonText}>REGISTER</Text>
         </TouchableHighlight>
+
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Login')} >
+          <Text style={styles.textCalcel}>Cancel Register</Text>
+        </TouchableOpacity>
+
       </View>
     );
   }
@@ -112,15 +116,26 @@ this.props.navigation.navigate('Login');
 }
 
 
-
+// Để làm một ứng dụng với đầy đủ các loại màn hình 
+// Chúng ta cần lấy kích thước chính xác của từng thiết bị
+// Chúng ta sử dụng bên dưới để làm điều đó
+// Và thế chúng ta đã lấy được width và hieght của thiết bị và bân giờ bạn chỉ cần lấy chúng và đặt
+// chiều cao cho một VIEW của bạn tính toán thế nào tùy bạn nhé
+// Ví dụ : Muốn làm một họp thông báo hiển thị vừa đủ màn hình
+const {width, height} = Dimensions.get('window');/////////////
+//////////////////////////////////////////////////////////////
 const styles = StyleSheet.create({
+  viewText:{
+    padding:10,
+    backgroundColor:'#455a64'
+  },
   container: {
-    flex: 1.2,
+    flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "#455a64",
-    padding: 20,
-    paddingTop: 100,
+    padding: 10,
+    paddingTop: 50,
     
   },
   logoContainer: {
@@ -128,43 +143,58 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor:'#455a64'
     
   },
   logo: {
-    width: 200,
-    height: 185
+    width: 128,
+    height: 120,
+    backgroundColor:'#455a64'
   },
   input: {
-    height: 40,
-    width: 350,
-    marginBottom: 10,
-    backgroundColor: "rgba(255,255,255,0.2)",
-    color: "#fff",
-    paddingHorizontal: 10
+    height: 40, 
+    width: width - 40,
+    color: '#455a64',
+    borderColor: '#FFFFFF',
+    backgroundColor:'#FFFFFF',
+    borderWidth: 2,
+    borderRadius: 20,
+    marginLeft:20,
+    marginRight:20,
+    marginTop:20
   },
   button: {
-    height: 50,
-    backgroundColor: "#f7c744",
+    height: 45,
+    backgroundColor:'#6193ab',
     alignSelf: "stretch",
-    marginTop: 10,
     justifyContent: "center",
-    paddingVertical: 15,
-    
+    borderRadius:30,
+    marginLeft:10,
+    marginRight:10,
+    marginTop:10
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 16,
     alignSelf: "center",
     textAlign: "center",
     color: "#FFF",
-    fontWeight: "700"
+    fontWeight: "700",
+  },
+  textCalcel: {
+    fontSize: 14,
+    alignSelf: "center",
+    textAlign: "center",
+    color: "#FFF",
+    fontWeight: "700",
+    marginTop:20,
+    marginBottom:20
   },
   subtext: {
-    color: "#f7c744",
-    width: 160,
-    textAlign: "center",
-    fontSize: 30,
-    fontWeight: "bold",
-    marginTop: 20,
+    color: '#FFFFFF',
+    fontSize: 20,
+    textAlign: 'center',
+    marginTop: 5,
+    opacity: 0.9,
   }
 });
 

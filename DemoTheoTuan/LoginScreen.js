@@ -6,7 +6,11 @@ import {
     KeyboardAvoidingView, Button, ToolbarAndroid
 } from 'react-native'
 
-export default class LoginScreen extends Component {
+    export default class LoginScreen extends Component {
+
+    static navigationOptions = {
+        header: null // Không sử dụng thanh toolbar giống trong Android
+    };
 
     constructor(props) {
         super(props);
@@ -39,7 +43,7 @@ export default class LoginScreen extends Component {
                                     value= {this.state.username}
                                     onChangeText={username => this.setState({ username })}
                                     placeholder="Enter username/email"
-                                    placeholderTextColor='rgba(255,255,255,0.8)'
+                                    placeholderTextColor='#455a64'
                                     keyboardType='email-address'
                                     returnKeyType='next'
                                     autoCorrect={false}
@@ -49,17 +53,19 @@ export default class LoginScreen extends Component {
                                     value= {this.state.password}
                                     onChangeText={password => this.setState({ password })}
                                     placeholder="Enter password"
-                                    placeholderTextColor='rgba(255,255,255,0.8)'
+                                    placeholderTextColor='#455a64'
                                     returnKeyType='go'
                                     secureTextEntry
                                     autoCorrect={false}
                                     ref={"txtPassword"}
                                 />
+
                                 <TouchableOpacity style={styles.buttonContainer} onPress={()=>this.login()} >
                                     <Text style={styles.buttonText}>SIGN IN</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.buttonContainer} onPress={()=>this.props.navigation.navigate('Register')} >
-                                    <Text style={styles.buttonText}>SIGN UP</Text>
+
+                                <TouchableOpacity onPress={()=>this.props.navigation.navigate('Register')} >
+                                    <Text style={styles.buttonText}>Sign Up</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -111,11 +117,13 @@ const styles = StyleSheet.create({
        backgroundColor: "#455a64",
         flexDirection: 'column',
         
+        
     },
     logoContainer: {
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
+        backgroundColor: '#455a64'
     },
     logo: {
         width: 128,
@@ -123,8 +131,8 @@ const styles = StyleSheet.create({
         
     },
     title: {
-        color: '#f7c744',
-        fontSize: 18,
+        color: '#FFFFFF',
+        fontSize: 20,
         textAlign: 'center',
         marginTop: 5,
         opacity: 0.9,
@@ -141,23 +149,28 @@ const styles = StyleSheet.create({
         // backgroundColor: 'red'
     },
     input: {
-        height: 40,
-        backgroundColor: 'rgba(255,255,255,0.2)',
-        color: '#FFF',
         marginBottom: 20,
-        paddingHorizontal: 10
+        height: 40,
+        color: '#775da9',
+        borderColor: '#FFFFFF',
+        backgroundColor:'#FFFFFF',
+        borderWidth: 2,
+        borderRadius: 20,
+        fontSize:15
     },
     buttonContainer: {
-        backgroundColor: '#f7c744',
+        backgroundColor: '#6193ab',
         paddingVertical: 15,
-        margin: 5
+        borderRadius: 30,
+        height: 50,
+        marginBottom:20
 
     },
     buttonText: {
         textAlign: 'center',
-        color :'rgb(32, 53, 70)',
+        color :'#FFFFFF',
         fontWeight: 'bold',
-        fontSize: 18
+        fontSize: 15
     },
     hello: {
         marginTop: 450
