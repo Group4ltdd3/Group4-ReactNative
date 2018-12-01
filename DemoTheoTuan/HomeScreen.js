@@ -18,6 +18,12 @@ export default class HomeScreen extends React.Component {
     
   }
 
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: "#16a085",
+      elevation: null,
+    }
+  };
   
   render() {
     return (
@@ -34,15 +40,15 @@ export default class HomeScreen extends React.Component {
       <TouchableOpacity style={styles.container} onPress={()=>{this.props.navigation.navigate('Detail')}}>
         <View style={styles.left}>
         <Image
-          style={{width: 150, height: 150}}
+          style={{width: 190, height: 250}}
           source={{uri: item.img}}
         />
         </View>
         <View style={styles.right}>
           
           <Text style={styles.title}>{item.title}</Text>
-          <Text >{item.price}</Text>
-          <Text>{item.des}</Text>
+          <Text style={styles.price}>{item.price}</Text>
+          <Text style={styles.des}>{item.des}</Text>
           
           
           
@@ -58,7 +64,7 @@ export default class HomeScreen extends React.Component {
   }
 
   onEndReached(){
-    fetch("http://192.168.0.109:8080/webservice/page_data.php?trang=" + (this.state.page + 1))
+    fetch("http://192.168.1.13/webservice/page_data.php?trang=" + (this.state.page + 1))
     .then((response)=> response.json())
     .then((responseJson)=>{
       this.setState({
@@ -73,7 +79,7 @@ export default class HomeScreen extends React.Component {
     this.setState({
       refresh: true
     });
-    fetch("http://192.168.0.109:8080/webservice/random_data.php")
+    fetch("http://192.168.1.13/webservice/random_data.php")
     .then((response)=> response.json())
     .then((responseJson)=>{
       this.setState({
@@ -85,7 +91,7 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount(){
-    fetch("http://192.168.0.109:8080/webservice/home.php")
+    fetch("http://192.168.1.13/webservice/home.php")
     .then((response)=> response.json())
     .then((responseJson)=>{
       this.setState({
@@ -111,7 +117,8 @@ const styles = StyleSheet.create({
   left: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    marginRight:45,
   },
   
   right: {
@@ -128,11 +135,22 @@ const styles = StyleSheet.create({
     marginLeft: 50
   },
   title: {
-    color:"#FFFAF0",
-    fontSize: 20,
+    color:"#FF0000",
+    fontSize: 25,
     fontWeight: 'bold',
-    marginLeft: 20
+    textAlign:'left'
+    
   },
+  price:{
+    color:"#FF0000",
+    fontSize:20,
+    textAlign:'left'
+  },
+  des:{
+    color:"#FFFAF0",
+    alignItems:'center',
+    textAlign:'left'
+  }
 
   
   
