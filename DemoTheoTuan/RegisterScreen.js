@@ -89,7 +89,7 @@ export default class RegisterScreen extends Component {
 
 
   register(){
-    fetch('http://192.168.0.109:8080/webservice/register.php', {
+    fetch('http://192.168.0.111/webservice/register.php', {
   method: 'POST',
   headers: {
     Accept: 'application/json',
