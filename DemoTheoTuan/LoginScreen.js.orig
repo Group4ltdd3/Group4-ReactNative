@@ -79,9 +79,15 @@ import {
     
 
     login(){
+<<<<<<< HEAD
+        this.props.navigation.navigate('Home');
+      /*
+        fetch('http://192.168.0.111:8080/webservice/login.php', {
+=======
         //this.props.navigation.navigate('Home');
       
         fetch('http://192.168.1.13/webservice/login.php', {
+>>>>>>> 134244c9494100b6d47cecaab9f5d028107684b6
             method: 'POST',
             headers: {
             Accept: 'application/json',
