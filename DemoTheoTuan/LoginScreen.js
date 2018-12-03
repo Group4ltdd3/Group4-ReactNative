@@ -17,6 +17,7 @@ import {
         this.state = {
           password: "",
           username: "",
+          mang:[]
           
         };
       }
@@ -79,9 +80,9 @@ import {
     
 
     login(){
-        //this.props.navigation.navigate('Home');
+        
       
-        fetch('http://192.168.1.13/webservice/login.php', {
+        fetch('http://192.168.0.105:8080/webservice/login.php', {
             method: 'POST',
             headers: {
             Accept: 'application/json',
@@ -94,11 +95,11 @@ import {
 })
         .then((response)=> response.json())
         .then((responseJson)=>{
-            if (responseJson == "ok"){
+            if (responseJson == "true"){
                 alert("Successfully Login");
                 this.props.navigation.navigate('Home');
             }else {
-                alert("Wrong Details");
+                alert("Login Failed");
             }
         })
         .catch((error)=>{
