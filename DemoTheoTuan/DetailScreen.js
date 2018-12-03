@@ -17,7 +17,7 @@ export default class DetailScreen extends Component {
       <View style={{flexDirection: 'column', margin: 20,    justifyContent: "center",
     alignItems: "center", }}>
       <Image source={{uri: 'https://cdn.tgdd.vn/Products/Images/42/191482/iphone-xs-max-512gb-gold-400x460.png'}}
-      style={{flexWrap: 'wrap', width: 100, height:100}}
+      style={{flexWrap: 'wrap', width: 100, height:150}}
       />
       <View style={{flex: 1, marginLeft: 10,marginTop:30}}>
       <Text style={styles.text}>

@@ -20,17 +20,11 @@ import RegisterScreen from './RegisterScreen';
 const RootStack = createStackNavigator(
   {
     Logout: {
-      screen: LogoutScreen, 
-      navigationOptions: {
-        headerTitle: 'Logout'
-      }
+      screen: LogoutScreen,
     },
 
     Infor: {
       screen: InforScreen, 
-      navigationOptions: {
-        headerTitle: 'Infor'
-      }
     },
 
 
@@ -41,9 +35,6 @@ const RootStack = createStackNavigator(
   
   Home: {
     screen: HomeScreen, 
-    navigationOptions: {
-      headerTitle: 'Home'
-    }
   },
   Detail: { 
     screen: DetailScreen,
