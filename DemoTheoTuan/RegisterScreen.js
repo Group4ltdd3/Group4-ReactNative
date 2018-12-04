@@ -93,7 +93,7 @@ export default class RegisterScreen extends Component {
 
 
   register(){
-    fetch('http://192.168.0.109:8080/webservice/register.php', {
+    fetch('http://192.168.0.112/webservice/register.php', {
   method: 'POST',
   headers: {
     Accept: 'application/json',
@@ -124,6 +124,7 @@ this.props.navigation.navigate('Login');
 // Ví dụ : Muốn làm một họp thông báo hiển thị vừa đủ màn hình
 const {width, height} = Dimensions.get('window');/////////////
 //////////////////////////////////////////////////////////////
+
 const styles = StyleSheet.create({
   viewText:{
     padding:10,

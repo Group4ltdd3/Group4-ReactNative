@@ -1,65 +1,60 @@
 
 
 import React from 'react';
-import { StyleSheet, Text, View, Button, FlatList, Image, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList, Image, TouchableOpacity } from 'react-native';
 
 
 
 export default class HomeScreen extends React.Component {
 
   constructor(props) {
-    super(props); 
-      this.state = {
-          mang:[],
-          refresh:false,
-          page: 1
-      }
-      console.disableYellowBox = true
-    
+    super(props);
+    this.state = {
+      mang: [],
+      refresh: false,
+      page: 1,
+
+    }
+    console.disableYellowBox = true
+
   }
 
   static navigationOptions = {
-    headerStyle: {
-      backgroundColor: "#16a085",
-      elevation: null,
-    }
+    header: null // Không sử dụng thanh toolbar giống trong Android
   };
-  
+
   render() {
     return (
-      
-        <FlatList
+
+      <View>
+      <TouchableOpacity style={styles.buttonContainer}>
+        <Text style={styles.buttonText}>Home</Text>
+      </TouchableOpacity>
+
+      <FlatList
 
         refreshing={this.state.refresh}
-        onRefresh={()=>{this.refresh()}}
+        onRefresh={() => { this.refresh() }}
         onEndReachedThreshold={-0.2}
-        onEndReached={()=>{this.onEndReached()}}
+        onEndReached={() => { this.onEndReached() }}
 
         data={this.state.mang}
-        renderItem={({item})=>
-      <TouchableOpacity style={styles.container} onPress={()=>{this.props.navigation.navigate('Detail')}}>
-        <View style={styles.left}>
-        <Image
-          style={{width: 190, height: 250}}
-          source={{uri: item.img}}
-        />
+        renderItem={({ item }) =>
+          <TouchableOpacity style={styles.container} onPress={() => { this.props.navigation.navigate('Detail') }}>
+            <View style={styles.left}>
+              <Image
+                style={{ width: 190, height: 250 }}
+                source={{ uri: item.img }}
+              />
+            </View>
+            <View style={styles.right}>
+              <Text style={styles.title}>{item.title}</Text>
+              <Text style={styles.price}>{item.price}</Text>
+              <Text style={styles.des}>{item.des}</Text>
+            </View>
+          </TouchableOpacity>}>
+      </FlatList>     
         </View>
-        <View style={styles.right}>
-          
-          <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.price}>{item.price}</Text>
-          <Text style={styles.des}>{item.des}</Text>
-          
-          
-          
-        </View>
-        
-        
-      </TouchableOpacity>}>
-
-        </FlatList>
-        
-        
     );
   }
 
@@ -75,7 +70,7 @@ export default class HomeScreen extends React.Component {
     .catch((error)=>{console.log(error)});
   }
 
-  refresh(){
+  refresh() {
     this.setState({
       refresh: true
     });
@@ -101,26 +96,31 @@ export default class HomeScreen extends React.Component {
     .catch((error)=>{console.log(error)});
   }
 
-  
-  
+
+
 }
 
 const styles = StyleSheet.create({
   container: {
-    borderBottomWidth:1,
+    borderBottomWidth: 1,
     padding: 50,
     borderRightWidth: 1,
     flexDirection: "row",
     backgroundColor: "#455a64"
   },
+  buttonContainer: {
+    backgroundColor: '#16a085',
+    paddingVertical: 17,
+    fontSize:17
 
+  },
   left: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginRight:45,
+    marginRight: 45,
   },
-  
+
   right: {
     flex: 1,
     justifyContent: "center",
@@ -135,25 +135,27 @@ const styles = StyleSheet.create({
     marginLeft: 50
   },
   title: {
-    color:"#FF0000",
+    color: "#FF0000",
     fontSize: 25,
     fontWeight: 'bold',
-    textAlign:'left'
-    
-  },
-  price:{
-    color:"#FF0000",
-    fontSize:20,
-    textAlign:'left'
-  },
-  des:{
-    color:"#FFFAF0",
-    alignItems:'center',
-    textAlign:'left'
-  }
+    textAlign: 'left'
 
-  
-  
+  },
+  price: {
+    color: "#FF0000",
+    fontSize: 20,
+    textAlign: 'left'
+  },
+  des: {
+    color: "#FFFAF0",
+    alignItems: 'center',
+    textAlign: 'left'
+  },
+  buttonText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 18
+  }
 });
 
 

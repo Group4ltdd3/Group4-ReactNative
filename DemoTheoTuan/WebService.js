@@ -40,7 +40,7 @@ export default class WebService extends React.Component {
   }
 
   componentDidMount(){
-    fetch("http://192.168.1.12/webservice/home.php")
+    fetch("http://192.168.0.112/webservice/home.php")
     .then((response)=> response.json())
     .then((responseJson)=>{
       this.setState({
