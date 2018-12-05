@@ -15,7 +15,7 @@ export default class HomeScreen extends React.Component {
       page: 1,
 
     }
-    console.disableYellowBox = true
+    
 
   }
 
@@ -27,34 +27,37 @@ export default class HomeScreen extends React.Component {
     return (
 
       <View>
-      <TouchableOpacity style={styles.buttonContainer}>
-        <Text style={styles.buttonText}>Home</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonContainer}>
+          <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
 
-      <FlatList
+        <FlatList
 
-        refreshing={this.state.refresh}
-        onRefresh={() => { this.refresh() }}
-        onEndReachedThreshold={-0.2}
-        onEndReached={() => { this.onEndReached() }}
+          refreshing={this.state.refresh}
+          onRefresh={() => { this.refresh() }}
+          onEndReachedThreshold={-0.2}
+          onEndReached={() => { this.onEndReached() }}
 
-        data={this.state.mang}
-        renderItem={({ item }) =>
-          <TouchableOpacity style={styles.container} onPress={() => { this.props.navigation.navigate('Detail') }}>
-            <View style={styles.left}>
-              <Image
-                style={{ width: 190, height: 250 }}
-                source={{ uri: item.img }}
-              />
-            </View>
-            <View style={styles.right}>
-              <Text style={styles.title}>{item.title}</Text>
-              <Text style={styles.price}>{item.price}</Text>
-              <Text style={styles.des}>{item.des}</Text>
-            </View>
-          </TouchableOpacity>}>
-      </FlatList>     
-        </View>
+          data={this.state.mang}
+          keyExtractor = {(item,index) => item.id}
+          renderItem={({ item }) =>
+            <TouchableOpacity style={styles.container} onPress={() => { this.props.navigation.navigate('Detail', {idSelected: item.id,
+              imgSelected: item.img, desSelected: item.des, titleSelected: item.title, priceSelected: item.price
+            }) }}>
+              <View style={styles.left}>
+                <Image
+                  style={{ width: 190, height: 250 }}
+                  source={{ uri: item.img }}
+                />
+              </View>
+              <View style={styles.right}>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.price}>{item.price}</Text>
+                <Text style={styles.des}>{item.des}</Text>
+              </View>
+            </TouchableOpacity>}>
+        </FlatList>
+      </View>
     );
   }
 
@@ -75,25 +78,25 @@ export default class HomeScreen extends React.Component {
       refresh: true
     });
     fetch("http://192.168.0.105:8080/webservice/random_data.php")
-    .then((response)=> response.json())
-    .then((responseJson)=>{
-      this.setState({
-        mang:responseJson,
-        refresh:false
-      });
-    })
-    .catch((error)=>{console.log(error)});
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          mang: responseJson,
+          refresh: false
+        });
+      })
+      .catch((error) => { console.log(error) });
   }
 
-  componentDidMount(){
+  componentDidMount() {
     fetch("http://192.168.0.105:8080/webservice/home.php")
-    .then((response)=> response.json())
-    .then((responseJson)=>{
-      this.setState({
-        mang:responseJson
-      });
-    })
-    .catch((error)=>{console.log(error)});
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          mang: responseJson
+        });
+      })
+      .catch((error) => { console.log(error) });
   }
 
 
@@ -111,7 +114,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     backgroundColor: '#16a085',
     paddingVertical: 17,
-    fontSize:17
+    fontSize: 17
 
   },
   left: {
