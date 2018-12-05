@@ -10,7 +10,7 @@ import {
   KeyboardAvoidingView,
   Dimensions,
   TouchableOpacity
-
+  
 } from "react-native";
 
 import { StackNavigator } from "react-navigation";
@@ -27,21 +27,21 @@ export default class RegisterScreen extends Component {
       email: "",
       password: "",
       username: "",
-
+      
     };
-  }
+  }   
 
   render() {
     return (
       <View style={styles.container}>
 
         <View style={styles.logoContainer}>
-          <Image style={styles.logo} source={{ uri: "https://cdn0.iconfinder.com/data/icons/BrushedMetalIcons_meBaze/512/Apple-03.png" }} />
+          <Image style={styles.logo} source={{uri:"https://cdn0.iconfinder.com/data/icons/BrushedMetalIcons_meBaze/512/Apple-03.png"}} />
           <Text style={styles.subtext}>Sign Up</Text>
         </View>
 
         <View style={styles.viewText}>
-          <TextInput
+        <TextInput
             value={this.state.username}
             onChangeText={username => this.setState({ username })}
             style={styles.input}
@@ -75,15 +75,15 @@ export default class RegisterScreen extends Component {
             returnKeyType="next"
           />
         </View>
-
+        
 
         <TouchableHighlight
-          onPress={() => this.register()}
+          onPress={()=>this.register()}
           style={styles.button}>
           <Text style={styles.buttonText}>REGISTER</Text>
         </TouchableHighlight>
 
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} >
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Login')} >
           <Text style={styles.textCalcel}>Cancel Register</Text>
         </TouchableOpacity>
 
@@ -122,13 +122,13 @@ export default class RegisterScreen extends Component {
 // Và thế chúng ta đã lấy được width và hieght của thiết bị và bân giờ bạn chỉ cần lấy chúng và đặt
 // chiều cao cho một VIEW của bạn tính toán thế nào tùy bạn nhé
 // Ví dụ : Muốn làm một họp thông báo hiển thị vừa đủ màn hình
-const { width, height } = Dimensions.get('window');/////////////
+const {width, height} = Dimensions.get('window');/////////////
 //////////////////////////////////////////////////////////////
 
 const styles = StyleSheet.create({
-  viewText: {
-    padding: 10,
-    backgroundColor: '#455a64'
+  viewText:{
+    padding:10,
+    backgroundColor:'#455a64'
   },
   container: {
     flex: 1,
@@ -137,42 +137,42 @@ const styles = StyleSheet.create({
     backgroundColor: "#455a64",
     padding: 10,
     paddingTop: 50,
-
+    
   },
   logoContainer: {
     alignItems: "center",
     flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: '#455a64'
-
+    backgroundColor:'#455a64'
+    
   },
   logo: {
     width: 128,
     height: 120,
-    backgroundColor: '#455a64'
+    backgroundColor:'#455a64'
   },
   input: {
-    height: 40,
+    height: 40, 
     width: width - 40,
     color: '#455a64',
     borderColor: '#FFFFFF',
-    backgroundColor: '#FFFFFF',
+    backgroundColor:'#FFFFFF',
     borderWidth: 2,
     borderRadius: 20,
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop: 20
+    marginLeft:20,
+    marginRight:20,
+    marginTop:20
   },
   button: {
     height: 45,
-    backgroundColor: '#6193ab',
+    backgroundColor:'#6193ab',
     alignSelf: "stretch",
     justifyContent: "center",
-    borderRadius: 30,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10
+    borderRadius:30,
+    marginLeft:10,
+    marginRight:10,
+    marginTop:10
   },
   buttonText: {
     fontSize: 16,
@@ -187,8 +187,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#FFF",
     fontWeight: "700",
-    marginTop: 20,
-    marginBottom: 20
+    marginTop:20,
+    marginBottom:20
   },
   subtext: {
     color: '#FFFFFF',

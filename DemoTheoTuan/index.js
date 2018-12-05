@@ -5,7 +5,6 @@ import App from './App';
 import home from './HomeScreen';
 
 import {name as appName} from './app.json';
-import Web from './WebService';
 import InforScreen from './InforScreen';
 import LogoutScreen from './LogoutScreen';
 AppRegistry.registerComponent(appName, () => App);

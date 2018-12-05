@@ -1,40 +1,14 @@
 import React, {Component} from 'react';
-import {Button, StyleSheet, Text, View, Image, TouchableOpacity, FlatList} from 'react-native';
+import {Button, StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 
 
 
 export default class DetailScreen extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      mang: [],
-      refresh: false,
-      page: 1,
-      
-
-    }
-    
-
-  }
-
 
   static navigationOptions = {
     header: null // Không sử dụng thanh toolbar giống trong Android
   };
-
-  componentDidMount(){
-    const {params} = this.props.navigation.state;
-    fetch("http://192.168.1.2:8080/webservice/page_data.php?page=" + params.id)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          mang: responseJson
-          
-        });
-      })
-      .catch((error) => { console.log(error) });
-  }
 
   render() {
     return (
@@ -42,25 +16,7 @@ export default class DetailScreen extends Component {
       <View style={{backgroundColor: '#efe2a6', flex: 1}}>
       <View style={{flexDirection: 'column', margin: 20,    justifyContent: "center",
     alignItems: "center", }}>
-    <FlatList
-    data = {this.state.mang}
-    keyExtractor={(item, index) => item.id}
-    renderItem={({ item }) =>
-            <TouchableOpacity style={styles.container}>
-              <View style={styles.left}>
-                <Image
-                  style={{ width: 190, height: 250 }}
-                  source={{ uri: item.img }}
-                />
-              </View>
-              <View style={styles.right}>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.price}>{item.price}</Text>
-                <Text style={styles.des}>{item.des}</Text>
-              </View>
-            </TouchableOpacity>}>
-    >
-      <Image source={{uri: {}}}
+      <Image source={{uri: 'https://cdn.tgdd.vn/Products/Images/42/191482/iphone-xs-max-512gb-gold-400x460.png'}}
       style={{flexWrap: 'wrap', width: 100, height:150}}
       />
       <View style={{flex: 1, marginLeft: 10,marginTop:30}}>
@@ -100,7 +56,6 @@ export default class DetailScreen extends Component {
 
 
       </View>
-      </FlatList>
       </View>
       </View>
       </View>
