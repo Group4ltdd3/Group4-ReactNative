@@ -6,7 +6,7 @@ import {
     KeyboardAvoidingView, Button, ToolbarAndroid
 } from 'react-native'
 
-    export default class LoginScreen extends Component {
+export default class LoginScreen extends Component {
 
     static navigationOptions = {
         header: null // Không sử dụng thanh toolbar giống trong Android
@@ -15,43 +15,43 @@ import {
     constructor(props) {
         super(props);
         this.state = {
-          password: "",
-          username: "",
-          mang:[]
-          
+            password: "",
+            username: "",
+            mang: []
+
         };
-      }
+    }
 
 
 
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <StatusBar barStyle="light-content" backgroundColor= "#1c313a" />
+                <StatusBar barStyle="light-content" backgroundColor="#1c313a" />
                 <KeyboardAvoidingView behavior='padding' style={styles.container} enabled>
-                    <TouchableWithoutFeedback style={styles.container} 
-                            onPress={Keyboard.dismiss}>
-                            
+                    <TouchableWithoutFeedback style={styles.container}
+                        onPress={Keyboard.dismiss}>
+
                         <View style={styles.logoContainer}>
                             <View style={styles.logoContainer}>
                                 <Image style={styles.logo}
-                                    source={{uri:'https://cdn0.iconfinder.com/data/icons/BrushedMetalIcons_meBaze/512/Apple-03.png'}}>
+                                    source={{ uri: 'https://cdn0.iconfinder.com/data/icons/BrushedMetalIcons_meBaze/512/Apple-03.png' }}>
                                 </Image>
                                 <Text style={styles.title}>Login</Text>
                             </View>
                             <View style={styles.infoContainer}>
                                 <TextInput style={styles.input}
-                                    value= {this.state.username}
+                                    value={this.state.username}
                                     onChangeText={username => this.setState({ username })}
                                     placeholder="Enter username/email"
                                     placeholderTextColor='#455a64'
                                     keyboardType='email-address'
                                     returnKeyType='next'
                                     autoCorrect={false}
-                                    onSubmitEditing={()=> this.refs.txtPassword.focus()}
+                                    onSubmitEditing={() => this.refs.txtPassword.focus()}
                                 />
-                                <TextInput style={styles.input} 
-                                    value= {this.state.password}
+                                <TextInput style={styles.input}
+                                    value={this.state.password}
                                     onChangeText={password => this.setState({ password })}
                                     placeholder="Enter password"
                                     placeholderTextColor='#455a64'
@@ -61,64 +61,64 @@ import {
                                     ref={"txtPassword"}
                                 />
 
-                                <TouchableOpacity style={styles.buttonContainer} onPress={()=>this.login()} >
+                                <TouchableOpacity style={styles.buttonContainer} onPress={() => this.login()} >
                                     <Text style={styles.buttonText}>SIGN IN</Text>
                                 </TouchableOpacity>
 
-                                <TouchableOpacity onPress={()=>this.props.navigation.navigate('Register')} >
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Register')} >
                                     <Text style={styles.buttonText}>Sign Up</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        
+
                     </TouchableWithoutFeedback>
                 </KeyboardAvoidingView>
             </SafeAreaView>
-             
+
         )
     }
-    
 
-    login(){
-        
-      
-        fetch('http://192.168.0.112/webservice/login.php', {
+
+    login() {
+
+
+        fetch('http://192.168.1.2:8080/webservice/login.php', {
             method: 'POST',
             headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-  },
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
-            username: this.state.username,
-            password: this.state.password
-  }),
-})
-        .then((response)=> response.json())
-        .then((responseJson)=>{
-            if (responseJson == "true"){
-                alert("Successfully Login");
-                this.props.navigation.navigate('Home');
-            }else {
-                alert("Login Failed");
-            }
+                username: this.state.username,
+                password: this.state.password
+            }),
         })
-        .catch((error)=>{
-            console.log(error);
-        })
-        
+            .then((response) => response.json())
+            .then((responseJson) => {
+                if (responseJson == "true") {
+                    alert("Successfully Login");
+                    this.props.navigation.navigate('Home');
+                } else {
+                    alert("Login Failed");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+
     }
-  
-     
-    
+
+
+
 }
 const styles = StyleSheet.create({
     container: {
         flex: 2,
-       // backgroundColor: 'rgb(32, 53, 70)', 
-       backgroundColor: "#455a64",
+        // backgroundColor: 'rgb(32, 53, 70)', 
+        backgroundColor: "#455a64",
         flexDirection: 'column',
-        
-        
+
+
     },
     logoContainer: {
         alignItems: 'center',
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     logo: {
         width: 128,
         height: 120,
-        
+
     },
     title: {
         color: '#FFFFFF',
@@ -154,27 +154,27 @@ const styles = StyleSheet.create({
         height: 40,
         color: '#775da9',
         borderColor: '#FFFFFF',
-        backgroundColor:'#FFFFFF',
+        backgroundColor: '#FFFFFF',
         borderWidth: 2,
         borderRadius: 20,
-        fontSize:15
+        fontSize: 15
     },
     buttonContainer: {
         backgroundColor: '#6193ab',
         paddingVertical: 15,
         borderRadius: 30,
         height: 50,
-        marginBottom:20
+        marginBottom: 20
 
     },
     buttonText: {
         textAlign: 'center',
-        color :'#FFFFFF',
+        color: '#FFFFFF',
         fontWeight: 'bold',
         fontSize: 15
     },
     hello: {
         marginTop: 450
     }
-    
+
 })

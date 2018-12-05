@@ -1,7 +1,17 @@
 
 
 import React from 'react';
-import { StyleSheet, Text, View, Button, FlatList, Image, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  ToastAndroid
+} from 'react-native';
+
 
 
 
@@ -13,9 +23,10 @@ export default class HomeScreen extends React.Component {
       mang: [],
       refresh: false,
       page: 1,
+      
 
     }
-    console.disableYellowBox = true
+    
 
   }
 
@@ -24,42 +35,58 @@ export default class HomeScreen extends React.Component {
   };
 
   render() {
+
     return (
 
       <View>
-      <TouchableOpacity style={styles.buttonContainer}>
-        <Text style={styles.buttonText}>Home</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonContainer}>
+          <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
 
-      <FlatList
+        <FlatList
 
-        refreshing={this.state.refresh}
-        onRefresh={() => { this.refresh() }}
-        onEndReachedThreshold={-0.2}
-        onEndReached={() => { this.onEndReached() }}
+          refreshing={this.state.refresh}
+          onRefresh={() => { this.refresh() }}
+          onEndReachedThreshold={-0.2}
+          onEndReached={() => { this.onEndReached() }}
 
-        data={this.state.mang}
-        renderItem={({ item }) =>
-          <TouchableOpacity style={styles.container} onPress={() => { this.props.navigation.navigate('Detail') }}>
-            <View style={styles.left}>
-              <Image
-                style={{ width: 190, height: 250 }}
-                source={{ uri: item.img }}
-              />
-            </View>
-            <View style={styles.right}>
-              <Text style={styles.title}>{item.title}</Text>
-              <Text style={styles.price}>{item.price}</Text>
-              <Text style={styles.des}>{item.des}</Text>
-            </View>
-          </TouchableOpacity>}>
-      </FlatList>     
-        </View>
+          data={this.state.mang}
+          keyExtractor={(item, index) => item.id}
+          ItemSeparatorComponent={this.renderSeparator}
+          renderItem={({ item }) =>
+            <TouchableOpacity style={styles.container} onPress={() => this.props.navigation.navigate('Detail',{item: item})}>
+              <View style={styles.left}>
+                <Image
+                  style={{ width: 190, height: 250 }}
+                  source={{ uri: item.img }}
+                />
+              </View>
+              <View style={styles.right}>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.price}>{item.price}</Text>
+                <Text style={styles.des}>{item.des}</Text>
+              </View>
+            </TouchableOpacity>}>
+
+
+        </FlatList>
+      </View>
     );
   }
 
+
+  renderSeparator = () => {
+    return (
+      <View
+        style={{ height: 1, width: '86%', backgroundColor: '#CED0CE', marginLeft: '14%' }}
+      >
+
+      </View>
+    );
+  };
+
   onEndReached() {
-    fetch("http://192.168.0.112/webservice/page_data.php?trang=" + (this.state.page + 1))
+    fetch("http://192.168.1.2:8080/webservice/page_data.php?page=" + this.state.page + 1)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -74,7 +101,7 @@ export default class HomeScreen extends React.Component {
     this.setState({
       refresh: true
     });
-    fetch("http://192.168.0.112/webservice/random_data.php")
+    fetch("http://192.168.1.2:8080/webservice/random_data.php")
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -86,7 +113,7 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://192.168.0.112/webservice/home.php")
+    fetch("http://192.168.1.2:8080/webservice/home.php")
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -111,7 +138,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     backgroundColor: '#16a085',
     paddingVertical: 17,
-    fontSize:17
+    fontSize: 17
 
   },
   left: {
