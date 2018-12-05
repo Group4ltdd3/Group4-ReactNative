@@ -52,8 +52,7 @@ export default class HomeScreen extends React.Component {
               </View>
               <View style={styles.right}>
                 <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.price}>{item.price}</Text>
-                <Text style={styles.des}>{item.des}</Text>
+                <Text style={styles.price}>Giá bán:{item.price}</Text>
               </View>
             </TouchableOpacity>}>
         </FlatList>
@@ -62,7 +61,7 @@ export default class HomeScreen extends React.Component {
   }
 
   onEndReached() {
-    fetch("http://192.168.0.105:8080/webservice/page_data.php?page=" + this.state.page + 1)
+    fetch("http://192.168.56.1:8080/webservice/page_data.php?page=" + this.state.page + 1)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -77,7 +76,7 @@ export default class HomeScreen extends React.Component {
     this.setState({
       refresh: true
     });
-    fetch("http://192.168.0.105:8080/webservice/random_data.php")
+    fetch("http://192.168.56.1:8080/webservice/random_data.php")
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -89,7 +88,7 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://192.168.0.105:8080/webservice/home.php")
+    fetch("http://192.168.56.1:8080/webservice/home.php")
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({

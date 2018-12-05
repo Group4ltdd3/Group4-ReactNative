@@ -82,7 +82,7 @@ export default class LoginScreen extends Component {
     login() {
 
 
-        fetch('http://192.168.0.105:8080/webservice/login.php', {
+        fetch('http://192.168.56.1:8080/webservice/login.php', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
