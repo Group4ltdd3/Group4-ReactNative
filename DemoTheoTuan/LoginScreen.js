@@ -17,7 +17,6 @@ export default class LoginScreen extends Component {
         this.state = {
             password: "",
             username: "",
-            mang: []
 
         };
     }
@@ -82,7 +81,7 @@ export default class LoginScreen extends Component {
     login() {
 
 
-        fetch('http://192.168.1.2:8080/webservice/login.php', {
+        fetch('http://192.168.0.105:8080/webservice/login.php', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

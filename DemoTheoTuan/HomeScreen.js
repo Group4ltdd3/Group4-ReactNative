@@ -86,7 +86,7 @@ export default class HomeScreen extends React.Component {
   };
 
   onEndReached() {
-    fetch("http://192.168.1.2:8080/webservice/page_data.php?page=" + this.state.page + 1)
+    fetch("http://192.168.0.105:8080/webservice/page_data.php?page=" + this.state.page + 1)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -101,7 +101,7 @@ export default class HomeScreen extends React.Component {
     this.setState({
       refresh: true
     });
-    fetch("http://192.168.0.109:8080/webservice/random_data.php")
+    fetch("http://192.168.0.105:8080/webservice/random_data.php")
     .then((response)=> response.json())
     .then((responseJson)=>{
       this.setState({
@@ -113,7 +113,7 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount(){
-    fetch("http://192.168.0.109:8080/webservice/home.php")
+    fetch("http://192.168.0.105:8080/webservice/home.php")
     .then((response)=> response.json())
     .then((responseJson)=>{
       this.setState({
