@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createStackNavigator, createAppContainer, createDrawerNavigator } from "react-navigation";
 import HomeScreen from './HomeScreen';
 import DetailScreen from './DetailScreen';
 import ShoppingCart from './ShoppingCart';
@@ -56,6 +56,10 @@ const RootStack = createStackNavigator(
   initialRouteName: 'Login',
 }
 );
+
+
+
+
 
 const AppContainer = createAppContainer(RootStack);
 

@@ -23,7 +23,7 @@ export default class DetailScreen extends Component {
 
   componentDidMount() {
     const { params } = this.props.navigation.state;
-    fetch("http://192.168.1.3/webservice/detail.php?page=" + params.idSelected)
+    fetch("http://192.168.1.3:8080/webservice/detail.php?page=" + params.idSelected)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({

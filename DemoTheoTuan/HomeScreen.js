@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, Button, FlatList, Image, TouchableOpacity } fro
 
 
 
+
 export default class HomeScreen extends React.Component {
 
   constructor(props) {
@@ -18,18 +19,21 @@ export default class HomeScreen extends React.Component {
     
 
   }
+  
 
-  static navigationOptions = {
-    header: null // Không sử dụng thanh toolbar giống trong Android
-  };
-
+  static navigationOptions = ({navigation}) => ({
+    title:'Home', // Không sử dụng thanh toolbar giống trong Android
+    headerLeft: null,
+  headerRight:<TouchableOpacity onPress={()=>{navigation.navigate('Infor')}}><Image source={require('./images/user_home.png')}
+    style={{width: 50, height: 50, marginRight: 20}} /></TouchableOpacity>
+  });
+  
+  
+  
   render() {
     return (
 
       <View>
-        <TouchableOpacity style={styles.buttonContainer}>
-          <Text style={styles.buttonText}>Home</Text>
-        </TouchableOpacity>
 
         <FlatList
 
@@ -61,7 +65,7 @@ export default class HomeScreen extends React.Component {
   }
 
   onEndReached() {
-    fetch("http://192.168.1.3/webservice/page_data.php?page=" + this.state.page + 1)
+    fetch("http://192.168.1.3:8080/webservice/page_data.php?page=" + this.state.page + 1)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -76,7 +80,7 @@ export default class HomeScreen extends React.Component {
     this.setState({
       refresh: true
     });
-    fetch("http://192.168.1.3/webservice/random_data.php")
+    fetch("http://192.168.1.3:8080/webservice/random_data.php")
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -88,7 +92,7 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://192.168.1.3/webservice/home.php")
+    fetch("http://192.168.1.3:8080/webservice/home.php")
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({

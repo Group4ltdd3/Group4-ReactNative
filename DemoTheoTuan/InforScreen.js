@@ -13,15 +13,15 @@ export default class InforScreen extends Component{
         
             <View>
                 <TouchableOpacity style={styles.buttonContainer}>
-                    <Text style={styles.buttonText}>Thông Tin Tài Khoản</Text>
+                    <Text style={styles.buttonText}>User Informations</Text>
                 </TouchableOpacity>
                 <Image style= {styles.imageStyle}
                     source={require('./images/userviet.png')}
                     //style={{flexWrap: 'wrap', width: 150, height:150}}                    
                 />
-                <Text style={styles.textname}>Thông tin</Text>
-                <Text style={styles.textTen}>Username : user</Text>
-                <Text style={styles.textEmail}>Email : user@admin.com</Text>
+                
+                <Text style={styles.textTen}>Username : thai</Text>
+                <Text style={styles.textEmail}>Email : thai@gmail.com</Text>
                             
             </View>
             </View>
@@ -31,7 +31,7 @@ export default class InforScreen extends Component{
 }
 styles = StyleSheet.create({
     container: {
-        flex: 2,
+        flex: 1,
        // backgroundColor: 'rgb(32, 53, 70)', 
        backgroundColor: "#efe2a6",
         flexDirection: 'column',
@@ -43,12 +43,14 @@ styles = StyleSheet.create({
     },
     textTen:{
         marginTop:10,
-        fontSize:20
+        fontSize:20,
+        textAlign: 'center'
     },
   
     textEmail:{
         marginTop:10,
-        fontSize:20
+        fontSize:20,
+        textAlign: 'center'
     },
     
     imageStyle:{
