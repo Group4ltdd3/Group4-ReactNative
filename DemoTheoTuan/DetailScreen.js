@@ -72,6 +72,23 @@ export default class DetailScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  title: {
+    color: 'red',
+    fontSize: 25,
+    marginLeft:40,
+    fontWeight:'bold'
+  },
+  price: {
+    color: 'black',
+    fontSize: 22,
+    marginLeft:40,
+    fontWeight:'bold'
+  },
+  des: {
+    color:'maroon',
+    fontWeight:'bold'
+  },
+  
   container: {
     flex: 1,
     justifyContent: 'center',

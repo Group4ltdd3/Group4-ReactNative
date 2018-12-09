@@ -16,20 +16,20 @@ export default class HomeScreen extends React.Component {
       page: 1,
 
     }
-    
+
 
   }
-  
 
-  static navigationOptions = ({navigation}) => ({
-    title:'Home', // Không sử dụng thanh toolbar giống trong Android
+
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Home', // Không sử dụng thanh toolbar giống trong Android
     headerLeft: null,
-  headerRight:<TouchableOpacity onPress={()=>{navigation.navigate('Infor')}}><Image source={require('./images/user_home.png')}
-    style={{width: 50, height: 50, marginRight: 20}} /></TouchableOpacity>
+    headerRight: <TouchableOpacity onPress={() => { navigation.navigate('Infor') }}><Image source={require('./images/user_home.png')}
+      style={{ width: 50, height: 50, marginRight: 20 }} /></TouchableOpacity>
   });
-  
-  
-  
+
+
+
   render() {
     return (
 
@@ -43,18 +43,21 @@ export default class HomeScreen extends React.Component {
           onEndReached={() => { this.onEndReached() }}
 
           data={this.state.mang}
-          keyExtractor = {(item,index) => item.id}
+          keyExtractor={(item, index) => item.id}
           renderItem={({ item }) =>
-            <TouchableOpacity style={styles.container} onPress={() => { this.props.navigation.navigate('Detail', {idSelected: item.id,
-              imgSelected: item.img, desSelected: item.des, titleSelected: item.title, priceSelected: item.price
-            }) }}>
+            <TouchableOpacity style={styles.container} onPress={() => {
+              this.props.navigation.navigate('Detail', {
+                idSelected: item.id,
+                imgSelected: item.img, desSelected: item.des, titleSelected: item.title, priceSelected: item.price
+              })
+            }}>
               <View style={styles.left}>
                 <Image
                   style={{ width: 190, height: 250 }}
                   source={{ uri: item.img }}
                 />
               </View>
-              <View style={styles.right}>
+              <View style={styles.right} >
                 <Text style={styles.title}>{item.title}</Text>
                 <Text style={styles.price}>Giá bán:{item.price}</Text>
               </View>
