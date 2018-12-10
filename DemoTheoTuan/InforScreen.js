@@ -28,26 +28,21 @@ export default class InforScreen extends Component {
                     </TouchableOpacity>
                     <Image style={styles.imageStyle}
                         source={require('./images/userviet.png')}
-                    //style={{flexWrap: 'wrap', width: 150, height:150}}                    
+
                     />
 
                     <Text style={styles.textTen}>Username : thai</Text>
                     <Text style={styles.textEmail}>Email : thai@gmail.com</Text>
 
                 </View>
-                <TouchableOpacity style={styles.buttonContainerLogout} onPress={() => this.logOut()}>
-                    <Text style={styles.buttonLogout}> Logout</Text>
-                </TouchableOpacity>
+                
             </View>
 
 
         )
     }
 
-    logOut() {
-        alert('Logout Successfully');
-        this.props.navigation.navigate('Login');
-    }
+    
 
 
 
@@ -77,7 +72,7 @@ styles = StyleSheet.create({
     },
 
     imageStyle: {
-        width: 100, 
+        width: 100,
         height: 100,
         marginBottom: 20,
         marginLeft: 140,
@@ -111,6 +106,7 @@ styles = StyleSheet.create({
 
     },
     buttonLogout: {
-        color: '#FFFFFF'
+        color: '#FFFFFF',
+        fontSize: 20
     }
 })

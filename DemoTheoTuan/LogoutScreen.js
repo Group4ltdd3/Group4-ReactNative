@@ -14,11 +14,16 @@ export default class LogoutScreen extends Component {
             <View style={styles.container}>
                 <View>
                     <Button title="Thông tin tài khoản" onPress={() => this.props.navigation.navigate('Infor')} color="green"></Button>
-                    <Button title="Đăng xuất" onPress={() => this.props.navigation.navigate('Login')} color="red"></Button>
+                    <Button title="Đăng xuất" onPress={() => this.logOut()} color="red"></Button>
                 </View>
             </View>
 
         )
+    }
+
+    logOut(){
+        alert('Logout Successfully');
+        this.props.navigation.navigate('Login');
     }
 }
 styles = StyleSheet.create({
